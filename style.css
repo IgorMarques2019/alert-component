@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.alert-area {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: start;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  gap: 16px;
+  padding: 24px;
+  pointer-events: none;
+}
+
+.alert {
+  flex-shrink: 0;
+  --bg-alert: #f3fbff;
+  --color-alert-title: hsl(from var(--bg-alert) h s calc(l - 70));
+  --color-alert-text: hsl(from var(--bg-alert) h s calc(l - 66));
+  --border-alert: hsl(from var(--bg-alert) h s calc(l - 10));
+  --bg-progress: hsl(from var(--bg-alert) h s calc(l - 66));
+
+  background-color: var(--bg-alert);
+  padding: 24px;
+  border: 1px solid var(--border-alert);
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  min-width: 300px;
+  max-width: 450px;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  overflow: hidden;
+  animation: enterAlert 0.5s forwards, exitAlert 1s var(--duration) forwards;
+  position: sticky;
+  justify-content: start;
+  top: 0;
+  transform: translateX(-100%);
+
+  .alert-icon {
+    font-size: 24px;
+
+    img {
+      max-width: 32px;
+      max-height: 32px;
+      width: 100%;
+      display: block;
+    }
+  }
+
+  /* Tipos de Alertas */
+  &.error {
+    --bg-alert: #ffb0c8;
+  }
+
+  &.success {
+    --bg-alert: #d8ffdb;
+  }
+
+  &.warning {
+    --bg-alert: #fff8d8;
+  }
+
+
+  .alert-text {
+    h3 {
+      font-size: 16px;
+      color: var(--color-alert-title);
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 14px;
+      margin-top: 8px;
+      color: var(--color-alert-text);
+    }
+
+    button {
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  }
+
+  .progress {
+    position: absolute;
+    bottom: 0;
+    height: 4px;
+    width: 0%;
+    background-color: var(--bg-progress);
+    animation: progressAnimate var(--duration) linear forwards;
+  }
+}
+
+@keyframes progressAnimate {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes enterAlert {
+  0% {
+    transform: translateX(100%);
+  }
+
+  95% {
+    transform: translateX(20px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes exitAlert {
+  0% {
+    transform: translateX(0);
+  }
+
+  5% {
+    transform: translateX(20px);
+  }
+
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
