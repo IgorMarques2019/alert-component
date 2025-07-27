@@ -28,7 +28,7 @@ class Alert {
     let alert = document.createElement("a");
     let alertIcon = document.createElement("div");
 
-    // Usa <span> (não "spam") para o ícone se não for imagem
+    // Usa <span> para o ícone se não for imagem
     let icon =
       mergedOptions.icon === null
         ? document.createElement("span")
